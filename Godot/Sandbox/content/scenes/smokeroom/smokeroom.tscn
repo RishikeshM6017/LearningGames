@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://mvocuea0qlt1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b6jba"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_3p8x0"]
+sky_material = SubResource("ProceduralSkyMaterial_b6jba")
+
+[sub_resource type="Environment" id="Environment_y56im"]
+background_mode = 2
+sky = SubResource("Sky_3p8x0")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ta4h"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16rl5"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y37n2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dxj5u"]
+radial_segments = 12
+
+[node name="Smokeroom" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y56im")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Static" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static/StaticBody3D"]
+shape = SubResource("BoxShape3D_5ta4h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Static/StaticBody3D"]
+mesh = SubResource("BoxMesh_16rl5")
+
+[node name="Spawn" type="Node3D" parent="."]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_y37n2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_dxj5u")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)

@@ -1,0 +1,113 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds1u52ciw3h1b"]
+
+[ext_resource type="Theme" uid="uid://dgoglg3gek8rw" path="res://resources/themes/default.theme" id="1_2an45"]
+[ext_resource type="Script" path="res://content/ui/main_menu/main_menu.gd" id="2_purpv"]
+
+[sub_resource type="Curve" id="Curve_s6roi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.75, 0.6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jldfx"]
+curve = SubResource("Curve_s6roi")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2an45")
+script = ExtResource("2_purpv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2an45")
+texture = SubResource("CurveTexture_jldfx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -74.0
+offset_right = 54.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2an45")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_2an45")
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2an45")
+text = "Main Menu"
+
+[node name="ContinueButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../StartButton")
+focus_next = NodePath("../StartButton")
+focus_previous = NodePath("../QuitButton")
+text = "Continue"
+
+[node name="StartButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ContinueButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ContinueButton")
+theme = ExtResource("1_2an45")
+text = "New Game"
+
+[node name="LoadButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../StartButton")
+disabled = true
+text = "Load Game"
+
+[node name="SettingsButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../LoadButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../LoadButton")
+theme = ExtResource("1_2an45")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_next = NodePath("../ContinueButton")
+focus_previous = NodePath("../SettingsButton")
+theme = ExtResource("1_2an45")
+text = "Quit"
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
