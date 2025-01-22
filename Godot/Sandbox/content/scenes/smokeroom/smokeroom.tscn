@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://mvocuea0qlt1"]
+[gd_scene load_steps=15 format=3 uid="uid://mvocuea0qlt1"]
+
+[ext_resource type="PackedScene" uid="uid://cvx1lqtjlq3cb" path="res://content/player/fpc/fpc.tscn" id="1_xklt7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b6jba"]
+sky_top_color = Color(0.410316, 0.68315, 0.947161, 1)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_3p8x0"]
 sky_material = SubResource("ProceduralSkyMaterial_b6jba")
@@ -11,7 +14,10 @@ sky_material = SubResource("ProceduralSkyMaterial_b6jba")
 background_mode = 2
 sky = SubResource("Sky_3p8x0")
 tonemap_mode = 2
-glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.779168, 0.800956, 0.835195, 1)
+fog_sky_affect = 0.23
+fog_depth_curve = 10.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ta4h"]
 size = Vector3(50, 1, 50)
@@ -19,10 +25,63 @@ size = Vector3(50, 1, 50)
 [sub_resource type="BoxMesh" id="BoxMesh_16rl5"]
 size = Vector3(50, 1, 50)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y37n2"]
+[sub_resource type="BoxMesh" id="BoxMesh_v0vmx"]
+size = Vector3(2, 2, 0.5)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_dxj5u"]
-radial_segments = 12
+[sub_resource type="BoxShape3D" id="BoxShape3D_50ft8"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="Curve3D" id="Curve3D_ig2su"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+up_vector_enabled = false
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2t5nq"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2lhgn"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="Animation" id="Animation_hpewf"]
+resource_name = "follow_path"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_jc4a4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdyve"]
+_data = {
+"RESET": SubResource("Animation_jc4a4"),
+"follow_path": SubResource("Animation_hpewf")
+}
 
 [node name="Smokeroom" type="Node3D"]
 
@@ -35,26 +94,63 @@ shadow_enabled = true
 
 [node name="Static" type="Node3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Static"]
+[node name="Floor_001" type="StaticBody3D" parent="Static"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Static/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static/Floor_001"]
 shape = SubResource("BoxShape3D_5ta4h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Static/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Static/Floor_001"]
 mesh = SubResource("BoxMesh_16rl5")
+
+[node name="Wall_001" type="StaticBody3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Static/Wall_001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_v0vmx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static/Wall_001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_50ft8")
+
+[node name="Wall_002" type="StaticBody3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Static/Wall_002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_v0vmx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static/Wall_002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_50ft8")
 
 [node name="Spawn" type="Node3D" parent="."]
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="FPC" parent="." instance=ExtResource("1_xklt7")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_y37n2")
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+curve = SubResource("Curve3D_ig2su")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_dxj5u")
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999995, 0, 0, 0, 0.999995, 0, 0, 0, 1, 0, 0, 0)
+rotation_mode = 0
+loop = false
+tilt_enabled = false
 
-[node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+[node name="Platform_001" type="AnimatableBody3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(0.999995, 0, 0, 0, 0.999995, 0, 0, 0, 1, 0, 1, 5)
+top_level = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Platform_001"]
+shape = SubResource("BoxShape3D_2t5nq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D/Platform_001"]
+mesh = SubResource("BoxMesh_2lhgn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path3D/PathFollow3D"]
+libraries = {
+"": SubResource("AnimationLibrary_hdyve")
+}
+autoplay = "follow_path"
