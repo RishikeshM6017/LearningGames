@@ -1,0 +1,215 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://xuw57dr31xou"
+path="res://.godot/imported/Prototype.glb-1c67a249c2d0129dec5963c067cffd33.scn"
+
+[deps]
+
+source_file="res://import/Prototype.glb"
+dest_files=["res://.godot/imported/Prototype.glb-1c67a249c2d0129dec5963c067cffd33.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=false
+animation/import=false
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"Floor": {
+"use_external/enabled": true,
+"use_external/path": "res://resources/materials/prototype/prototype_floor.material"
+},
+"Stair": {
+"use_external/enabled": true,
+"use_external/path": "res://resources/materials/prototype/prototype_stair.material"
+},
+"Wall": {
+"use_external/enabled": true,
+"use_external/path": "res://resources/materials/prototype/prototype_wall.material"
+}
+},
+"meshes": {
+"Prototype_Floor": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Floor.res"
+},
+"Prototype_Floor_Large": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Floor_Large.res"
+},
+"Prototype_Stair1X1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Stair1X1.res"
+},
+"Prototype_Stair2X1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Stair2X1.res"
+},
+"Prototype_Stair2X1_Large": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Stair2X1_Large.res"
+},
+"Prototype_Stair2X1_Small": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Stair2X1_Small.res"
+},
+"Prototype_Wall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Wall.res"
+},
+"Prototype_WallCorner": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallCorner.res"
+},
+"Prototype_WallCorner_Short": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallCorner_Short.res"
+},
+"Prototype_WallCorner_Tall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallCorner_Tall.res"
+},
+"Prototype_WallEnd": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallEnd.res"
+},
+"Prototype_WallEnd_Short": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallEnd_Short.res"
+},
+"Prototype_WallEnd_Tall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallEnd_Tall.res"
+},
+"Prototype_WallTransition_MS": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallTransition_MS.res"
+},
+"Prototype_WallTransition_TM": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallTransition_TM.res"
+},
+"Prototype_WallTransition_TS": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_WallTransition_TS.res"
+},
+"Prototype_Wall_Short": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Wall_Short.res"
+},
+"Prototype_Wall_Tall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://resources/mesh/prototype/Prototype_Wall_Tall.res"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

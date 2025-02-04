@@ -25,6 +25,10 @@ window/size/resizable=false
 window/size/always_on_top=true
 window/size/extend_to_title=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/exclusive_hide/plugin.cfg", "res://addons/mesh_lib/plugin.cfg")
+
 [input]
 
 move_forward={
