@@ -1,0 +1,2 @@
+class_name ControllerCollider3D
+extends CollisionShape3D

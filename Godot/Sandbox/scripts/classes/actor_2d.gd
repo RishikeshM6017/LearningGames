@@ -1,0 +1,2 @@
+class_name Actor2D
+extends CharacterBody2D
