@@ -1,0 +1,2 @@
+class_name Interactable2D
+extends Area2D

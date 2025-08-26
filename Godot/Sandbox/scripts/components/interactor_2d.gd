@@ -1,0 +1,2 @@
+class_name Interactor2D
+extends Area2D

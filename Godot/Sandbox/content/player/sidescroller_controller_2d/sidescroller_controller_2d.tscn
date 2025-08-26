@@ -1,0 +1,199 @@
+[gd_scene load_steps=15 format=3 uid="uid://dprscbhyi67qd"]
+
+[ext_resource type="Script" uid="uid://midg5u4rbwo6" path="res://content/player/sidescroller_controller_2d/sidescroller_controller_2d.gd" id="1_afxjd"]
+[ext_resource type="Script" uid="uid://cvdw4bo1g0hc1" path="res://scripts/components/controller_collider_2d.gd" id="1_g2afg"]
+[ext_resource type="Texture2D" uid="uid://dmdknu6csm3ol" path="res://resources/images/tilemaps/TM_PixelPlatformerChaarcters.png" id="2_epdxe"]
+[ext_resource type="Script" uid="uid://uvtq31ios56f" path="res://scripts/components/interactor_2d.gd" id="4_epdxe"]
+[ext_resource type="Texture2D" uid="uid://b4bja0cym6qjc" path="res://resources/images/sprites/SP_EmptyHeart.png" id="5_onnpn"]
+[ext_resource type="Script" uid="uid://b1qoo2sgqxb3y" path="res://content/player/sidescroller_controller_2d/healthbar.gd" id="6_3343s"]
+[ext_resource type="Texture2D" uid="uid://ylc63tur1e0t" path="res://resources/images/sprites/SP_HalfHeart.png" id="7_jkx1l"]
+[ext_resource type="Texture2D" uid="uid://b1enmirow51h1" path="res://resources/images/sprites/SP_Heart.png" id="7_vr2f3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkn3r"]
+radius = 8.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_hbnxs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_onnpn"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_epdxe"]
+resource_name = "move"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_onnpn"]
+_data = {
+&"RESET": SubResource("Animation_hbnxs"),
+&"idle": SubResource("Animation_onnpn"),
+&"move": SubResource("Animation_epdxe")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbnxs"]
+radius = 24.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_afxjd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_epdxe")
+flip_h = true
+hframes = 9
+vframes = 3
+
+[node name="ControllerCollider2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_hkn3r")
+script = ExtResource("1_g2afg")
+metadata/_custom_type_script = "uid://cvdw4bo1g0hc1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_onnpn")
+}
+
+[node name="Interactor2D" type="Area2D" parent="."]
+script = ExtResource("4_epdxe")
+metadata/_custom_type_script = "uid://uvtq31ios56f"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor2D"]
+shape = SubResource("CircleShape2D_hbnxs")
+debug_color = Color(1, 1, 0, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+texture_filter = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.086
+size_flags_horizontal = 3
+script = ExtResource("6_3343s")
+empty = ExtResource("5_onnpn")
+half = ExtResource("7_jkx1l")
+full = ExtResource("7_vr2f3")
+maximum = 4.0
+
+[node name="TextureRect1" type="TextureRect" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("7_vr2f3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("7_vr2f3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("7_jkx1l")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="HUD/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="HUD/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect7" type="TextureRect" parent="HUD/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect8" type="TextureRect" parent="HUD/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect9" type="TextureRect" parent="HUD/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect10" type="TextureRect" parent="HUD/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_onnpn")
+expand_mode = 2
+stretch_mode = 5

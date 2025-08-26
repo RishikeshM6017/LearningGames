@@ -1,3 +1,253 @@
-[gd_scene format=3 uid="uid://b6rdowjl8lseo"]
+[gd_scene load_steps=16 format=4 uid="uid://b6rdowjl8lseo"]
+
+[ext_resource type="PackedScene" uid="uid://dprscbhyi67qd" path="res://content/player/sidescroller_controller_2d/sidescroller_controller_2d.tscn" id="1_aarpy"]
+[ext_resource type="TileSet" uid="uid://vkac0ic18wtx" path="res://resources/tilesets/pixelplatformer_tileset.tres" id="2_dwlnu"]
+[ext_resource type="Script" uid="uid://dywusdonf4ncr" path="res://scripts/components/interactable_2d.gd" id="2_l8j71"]
+[ext_resource type="Texture2D" uid="uid://cgc86r5vfv5gg" path="res://resources/images/spritesheets/SS_Coins.png" id="3_l8j71"]
+[ext_resource type="TileSet" uid="uid://dhuxqcw6s8a5x" path="res://resources/tilesets/pixelplatformerbackground_tileset.tres" id="5_lv4xx"]
+[ext_resource type="Texture2D" uid="uid://be0jf8k8inhjj" path="res://resources/images/spritesheets/SS_Lever.png" id="5_nt26c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lv4xx"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_5b7ua"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pr7rh"]
+resource_name = "default"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(-2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpyd6"]
+_data = {
+&"RESET": SubResource("Animation_5b7ua"),
+&"default": SubResource("Animation_pr7rh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pr7rh"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_2ybcm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lpyd6"]
+resource_name = "switch-left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_d8t4b"]
+resource_name = "switch-right"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_klfis"]
+_data = {
+&"RESET": SubResource("Animation_2ybcm"),
+&"switch-left": SubResource("Animation_lpyd6"),
+&"switch-right": SubResource("Animation_d8t4b")
+}
 
 [node name="Smokeroom" type="Node2D"]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="BackgroundLayer" type="TileMapLayer" parent="Environment"]
+tile_map_data = PackedByteArray("AAD2/wEAAAAGAAIAAAD3/wEAAAAHAAIAAAD4/wEAAAAGAAIAAAD5/wEAAAAHAAIAAAD6/wEAAAAGAAIAAAD7/wEAAAAHAAIAAAD8/wEAAAAGAAIAAAD9/wEAAAAHAAIAAAD+/wEAAAAGAAIAAAD//wEAAAAHAAIAAAAAAAEAAAAGAAIAAAABAAEAAAAHAAIAAAACAAEAAAAGAAIAAAADAAEAAAAHAAIAAAAEAAEAAAAGAAIAAAAFAAEAAAAHAAIAAAAGAAEAAAAGAAIAAAAHAAEAAAAHAAIAAAAIAAEAAAAGAAIAAAAJAAEAAAAHAAIAAAAIAAIAAAAGAAIAAAAJAAIAAAAHAAIAAAAGAAIAAAAGAAIAAAAHAAIAAAAHAAIAAAAEAAIAAAAGAAIAAAAFAAIAAAAHAAIAAAACAAIAAAAGAAIAAAADAAIAAAAHAAIAAAAAAAIAAAAGAAIAAAABAAIAAAAHAAIAAAD+/wIAAAAGAAIAAAD//wIAAAAHAAIAAAD8/wIAAAAGAAIAAAD9/wIAAAAHAAIAAAD6/wIAAAAGAAIAAAD7/wIAAAAHAAIAAAD4/wIAAAAGAAIAAAD5/wIAAAAHAAIAAAD2/wIAAAAGAAIAAAD3/wIAAAAHAAIAAAD0/wEAAAAGAAIAAAD1/wEAAAAHAAIAAAD0/wIAAAAGAAIAAAD1/wIAAAAHAAIAAAAKAAEAAAAGAAIAAAALAAEAAAAHAAIAAAAKAAIAAAAGAAIAAAALAAIAAAAHAAIAAAD0/wAAAAAHAAEAAAD1/wAAAAAHAAEAAAD2/wAAAAAGAAEAAAD3/wAAAAAGAAEAAAD4/wAAAAAHAAEAAAD5/wAAAAAHAAEAAAD6/wAAAAAHAAEAAAD7/wAAAAAGAAEAAAD8/wAAAAAGAAEAAAD9/wAAAAAGAAEAAAD+/wAAAAAGAAEAAAD//wAAAAAHAAEAAAAAAAAAAAAGAAEAAAABAAAAAAAGAAEAAAACAAAAAAAGAAEAAAADAAAAAAAGAAEAAAAEAAAAAAAGAAEAAAAFAAAAAAAGAAEAAAAGAAAAAAAHAAEAAAAHAAAAAAAGAAEAAAAIAAAAAAAHAAEAAAAJAAAAAAAGAAEAAAAKAAAAAAAHAAEAAAALAAAAAAAGAAEAAAD0//r/AAAGAAAAAAD0//v/AAAGAAAAAAD0//z/AAAGAAAAAAD0//3/AAAGAAAAAAD0//7/AAAHAAAAAAD0////AAAHAAAAAAD1//r/AAAHAAAAAAD1//v/AAAGAAAAAAD1//z/AAAGAAAAAAD1//3/AAAGAAAAAAD1//7/AAAGAAAAAAD1////AAAHAAAAAAD2//r/AAAGAAAAAAD2//v/AAAHAAAAAAD2//z/AAAGAAAAAAD2//3/AAAGAAAAAAD2//7/AAAHAAAAAAD2////AAAHAAAAAAD3//r/AAAGAAAAAAD3//v/AAAHAAAAAAD3//z/AAAGAAAAAAD3//3/AAAHAAAAAAD3//7/AAAHAAAAAAD3////AAAHAAAAAAD4//r/AAAHAAAAAAD4//v/AAAHAAAAAAD4//z/AAAGAAAAAAD4//3/AAAHAAAAAAD4//7/AAAGAAAAAAD4////AAAHAAAAAAD5//r/AAAGAAAAAAD5//v/AAAHAAAAAAD5//z/AAAHAAAAAAD5//3/AAAHAAAAAAD5//7/AAAHAAAAAAD5////AAAHAAAAAAD6//r/AAAGAAAAAAD6//v/AAAGAAAAAAD6//z/AAAGAAAAAAD6//3/AAAHAAAAAAD6//7/AAAGAAAAAAD6////AAAGAAAAAAD7//r/AAAGAAAAAAD7//v/AAAHAAAAAAD7//z/AAAGAAAAAAD7//3/AAAHAAAAAAD7//7/AAAHAAAAAAD7////AAAHAAAAAAD8//r/AAAHAAAAAAD8//v/AAAGAAAAAAD8//z/AAAHAAAAAAD8//3/AAAHAAAAAAD8//7/AAAGAAAAAAD8////AAAGAAAAAAD9//r/AAAHAAAAAAD9//v/AAAHAAAAAAD9//z/AAAHAAAAAAD9//3/AAAHAAAAAAD9//7/AAAGAAAAAAD9////AAAGAAAAAAD+//r/AAAGAAAAAAD+//v/AAAGAAAAAAD+//z/AAAGAAAAAAD+//3/AAAGAAAAAAD+//7/AAAGAAAAAAD+////AAAGAAAAAAD///r/AAAHAAAAAAD///v/AAAGAAAAAAD///z/AAAHAAAAAAD///3/AAAHAAAAAAD///7/AAAGAAAAAAD/////AAAHAAAAAAAAAPr/AAAHAAAAAAAAAPv/AAAHAAAAAAAAAPz/AAAHAAAAAAAAAP3/AAAHAAAAAAAAAP7/AAAGAAAAAAAAAP//AAAGAAAAAAABAPr/AAAGAAAAAAABAPv/AAAGAAAAAAABAPz/AAAGAAAAAAABAP3/AAAHAAAAAAABAP7/AAAGAAAAAAABAP//AAAGAAAAAAACAPr/AAAHAAAAAAACAPv/AAAGAAAAAAACAPz/AAAHAAAAAAACAP3/AAAHAAAAAAACAP7/AAAGAAAAAAACAP//AAAHAAAAAAADAPr/AAAGAAAAAAADAPv/AAAGAAAAAAADAPz/AAAHAAAAAAADAP3/AAAHAAAAAAADAP7/AAAGAAAAAAADAP//AAAGAAAAAAAEAPr/AAAHAAAAAAAEAPv/AAAHAAAAAAAEAPz/AAAHAAAAAAAEAP3/AAAHAAAAAAAEAP7/AAAHAAAAAAAEAP//AAAGAAAAAAAFAPr/AAAGAAAAAAAFAPv/AAAGAAAAAAAFAPz/AAAHAAAAAAAFAP3/AAAHAAAAAAAFAP7/AAAHAAAAAAAFAP//AAAGAAAAAAAGAPr/AAAHAAAAAAAGAPv/AAAGAAAAAAAGAPz/AAAGAAAAAAAGAP3/AAAGAAAAAAAGAP7/AAAGAAAAAAAGAP//AAAGAAAAAAAHAPr/AAAGAAAAAAAHAPv/AAAHAAAAAAAHAPz/AAAHAAAAAAAHAP3/AAAHAAAAAAAHAP7/AAAGAAAAAAAHAP//AAAGAAAAAAAIAPr/AAAHAAAAAAAIAPv/AAAHAAAAAAAIAPz/AAAGAAAAAAAIAP3/AAAHAAAAAAAIAP7/AAAGAAAAAAAIAP//AAAHAAAAAAAJAPr/AAAHAAAAAAAJAPv/AAAHAAAAAAAJAPz/AAAHAAAAAAAJAP3/AAAGAAAAAAAJAP7/AAAHAAAAAAAJAP//AAAGAAAAAAAKAPr/AAAGAAAAAAAKAPv/AAAGAAAAAAAKAPz/AAAGAAAAAAAKAP3/AAAGAAAAAAAKAP7/AAAHAAAAAAAKAP//AAAGAAAAAAALAPr/AAAGAAAAAAALAPv/AAAGAAAAAAALAPz/AAAGAAAAAAALAP3/AAAGAAAAAAALAP7/AAAHAAAAAAALAP//AAAHAAAAAAA=")
+tile_set = ExtResource("5_lv4xx")
+
+[node name="TerrainLayer" type="TileMapLayer" parent="Environment"]
+texture_filter = 1
+texture_repeat = 1
+tile_map_data = PackedByteArray("AADx/wIAAAAAAAAAAADy/wIAAAACAAEAAADz/wIAAAAAAAAAAAD0/wIAAAAAAAAAAAD1/wIAAAACAAAAAAD2/wIAAAABAAEAAADv/wMAAAADAAEAAADw/wMAAAADAAEAAAD3/wMAAAABAAAAAAD4/wMAAAADAAEAAAD5/wMAAAADAAEAAAD6/wQAAAABAAEAAAD7/wQAAAABAAAAAAD8/wQAAAAAAAEAAAD9/wQAAAACAAAAAAD+/wQAAAABAAEAAAD//wQAAAAAAAAAAAAAAAQAAAACAAAAAAABAAQAAAACAAAAAAACAAQAAAADAAAAAAADAAQAAAADAAEAAAAEAAQAAAADAAAAAAAFAAMAAAABAAAAAAAGAAMAAAACAAAAAAAHAAMAAAADAAAAAAAIAAIAAAAAAAEAAAAJAAIAAAABAAEAAAAKAAEAAAADAAEAAAALAAEAAAAAAAAAAAAMAAEAAAACAAEAAAANAAEAAAABAAEAAAAOAAEAAAAAAAEAAAAPAAIAAAAAAAEAAAAQAAIAAAAAAAAAAAAQAAMAAAADAAEAAAARAAMAAAAAAAEAAAASAAMAAAAAAAEAAAATAAMAAAACAAEAAADv/wQAAAACAAcAAADv/wUAAAADAAYAAADv/wYAAAAEAAAAAADv/wcAAAAFAAEAAADv/wgAAAAEAAEAAADw/wQAAAADAAYAAADw/wUAAAABAAcAAADw/wYAAAAFAAEAAADw/wcAAAAFAAEAAADw/wgAAAAEAAEAAADx/wQAAAABAAcAAADx/wUAAAAFAAAAAADx/wYAAAAAAAYAAADx/wcAAAABAAYAAADx/wgAAAACAAcAAADy/wQAAAACAAYAAADy/wUAAAADAAYAAADy/wYAAAAEAAAAAADy/wcAAAADAAYAAADy/wgAAAACAAcAAADz/wQAAAAEAAAAAADz/wUAAAAFAAEAAADz/wYAAAACAAYAAADz/wcAAAAEAAAAAADz/wgAAAADAAcAAAD0/wQAAAAFAAAAAAD0/wUAAAAFAAAAAAD0/wYAAAACAAcAAAD0/wcAAAAAAAYAAAD0/wgAAAAEAAAAAAD1/wQAAAABAAYAAAD1/wUAAAAEAAUAAAD1/wYAAAACAAcAAAD1/wcAAAACAAYAAAD1/wgAAAAAAAcAAAD2/wQAAAAGAAAAAAD2/wUAAAAFAAEAAAD2/wYAAAACAAcAAAD2/wcAAAAGAAAAAAD2/wgAAAAAAAYAAAD3/wQAAAAFAAEAAAD3/wUAAAACAAcAAAD3/wYAAAAFAAAAAAD3/wcAAAAAAAcAAAD3/wgAAAAEAAAAAAD4/wQAAAAEAAUAAAD4/wUAAAAFAAEAAAD4/wYAAAADAAYAAAD4/wcAAAAEAAAAAAD4/wgAAAACAAcAAAD5/wQAAAACAAYAAAD5/wUAAAAEAAEAAAD5/wYAAAAFAAEAAAD5/wcAAAAFAAEAAAD5/wgAAAAAAAcAAAD6/wUAAAACAAcAAAD6/wYAAAAAAAcAAAD6/wcAAAAFAAAAAAD6/wgAAAAFAAEAAAD7/wUAAAADAAcAAAD7/wYAAAABAAcAAAD7/wcAAAACAAcAAAD7/wgAAAACAAYAAAD8/wUAAAACAAcAAAD8/wYAAAACAAcAAAD8/wcAAAACAAYAAAD8/wgAAAACAAYAAAD9/wUAAAABAAcAAAD9/wYAAAAEAAUAAAD9/wcAAAAGAAAAAAD9/wgAAAABAAcAAAD+/wUAAAAAAAcAAAD+/wYAAAAGAAAAAAD+/wcAAAACAAcAAAD+/wgAAAAFAAAAAAD//wUAAAACAAcAAAD//wYAAAAEAAUAAAD//wcAAAADAAcAAAD//wgAAAABAAcAAAAAAAUAAAADAAcAAAAAAAYAAAAAAAcAAAAAAAcAAAAEAAEAAAAAAAgAAAAGAAAAAAABAAUAAAAEAAEAAAABAAYAAAAAAAYAAAABAAcAAAACAAcAAAABAAgAAAAAAAcAAAACAAUAAAACAAYAAAACAAYAAAACAAcAAAACAAcAAAACAAYAAAACAAgAAAABAAYAAAADAAUAAAABAAYAAAADAAYAAAAGAAAAAAADAAcAAAAEAAEAAAADAAgAAAAFAAAAAAAEAAUAAAAAAAYAAAAEAAYAAAAFAAAAAAAEAAcAAAABAAcAAAAEAAgAAAABAAcAAAAFAAUAAAABAAYAAAAFAAYAAAAEAAEAAAAFAAcAAAAFAAEAAAAFAAgAAAAAAAYAAAAGAAUAAAAEAAEAAAAGAAYAAAACAAcAAAAGAAcAAAAFAAEAAAAGAAgAAAAFAAEAAAAHAAUAAAACAAcAAAAHAAYAAAAAAAYAAAAHAAcAAAAAAAYAAAAHAAgAAAAEAAEAAAAIAAUAAAAFAAEAAAAIAAYAAAAEAAUAAAAIAAcAAAAEAAEAAAAIAAgAAAAFAAEAAAAJAAUAAAACAAcAAAAJAAYAAAAEAAAAAAAJAAcAAAAAAAYAAAAJAAgAAAAEAAUAAAAKAAUAAAABAAYAAAAKAAYAAAAFAAAAAAAKAAcAAAACAAcAAAAKAAgAAAACAAYAAAALAAUAAAAFAAEAAAALAAYAAAACAAYAAAALAAcAAAAGAAAAAAALAAgAAAAGAAAAAAAMAAUAAAAEAAUAAAAMAAYAAAAFAAAAAAAMAAcAAAAGAAAAAAAMAAgAAAAAAAcAAAANAAUAAAADAAYAAAANAAYAAAAGAAAAAAANAAcAAAACAAYAAAANAAgAAAABAAcAAAAOAAUAAAAAAAcAAAAOAAYAAAABAAYAAAAOAAcAAAAEAAEAAAAOAAgAAAACAAYAAAAPAAUAAAAEAAAAAAAPAAYAAAAAAAYAAAAPAAcAAAAGAAAAAAAPAAgAAAAAAAYAAAAQAAUAAAAEAAUAAAAQAAYAAAAGAAAAAAAQAAcAAAAEAAUAAAAQAAgAAAACAAcAAAARAAUAAAABAAYAAAARAAYAAAADAAYAAAARAAcAAAAEAAEAAAARAAgAAAAFAAAAAAASAAUAAAAEAAEAAAASAAYAAAACAAcAAAASAAcAAAAEAAUAAAASAAgAAAAAAAYAAAATAAUAAAAAAAcAAAATAAYAAAABAAYAAAATAAcAAAADAAcAAAATAAgAAAACAAYAAAAFAAQAAAAFAAEAAAAGAAQAAAAFAAAAAAAHAAQAAAABAAcAAAAIAAQAAAACAAYAAAAJAAQAAAAGAAAAAAAKAAQAAAACAAYAAAALAAQAAAAEAAAAAAAMAAQAAAADAAcAAAANAAQAAAAFAAEAAAAOAAQAAAACAAcAAAAPAAQAAAAEAAUAAAAQAAQAAAABAAcAAAARAAQAAAAAAAYAAAASAAQAAAAEAAUAAAATAAQAAAAEAAAAAAAIAAMAAAADAAYAAAAJAAMAAAAFAAEAAAAKAAMAAAAEAAEAAAALAAMAAAACAAcAAAAMAAMAAAACAAcAAAANAAMAAAAEAAEAAAAOAAMAAAAGAAAAAAAPAAMAAAAEAAEAAAAKAAIAAAACAAcAAAALAAIAAAACAAcAAAAMAAIAAAAFAAEAAAANAAIAAAAFAAAAAAAOAAIAAAAGAAAAAADx/wMAAAAAAAcAAADy/wMAAAACAAYAAADz/wMAAAAEAAEAAAD0/wMAAAAAAAcAAAD1/wMAAAADAAYAAAD2/wMAAAADAAYAAAA=")
+tile_set = ExtResource("2_dwlnu")
+
+[node name="Coins" type="Node2D" parent="Environment"]
+
+[node name="Coin1" type="Area2D" parent="Environment/Coins"]
+position = Vector2(-192, 16)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_l8j71")
+metadata/_custom_type_script = "uid://dywusdonf4ncr"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Coins/Coin1"]
+shape = SubResource("CircleShape2D_lv4xx")
+debug_color = Color(1, 0.498039, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Coins/Coin1"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("3_l8j71")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Coins/Coin1"]
+libraries = {
+&"": SubResource("AnimationLibrary_lpyd6")
+}
+autoplay = "default"
+
+[node name="Coin2" type="Area2D" parent="Environment/Coins"]
+position = Vector2(-176, 16)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_l8j71")
+metadata/_custom_type_script = "uid://dywusdonf4ncr"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Coins/Coin2"]
+shape = SubResource("CircleShape2D_lv4xx")
+debug_color = Color(1, 0.498039, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Coins/Coin2"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("3_l8j71")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Coins/Coin2"]
+libraries = {
+&"": SubResource("AnimationLibrary_lpyd6")
+}
+autoplay = "default"
+
+[node name="Coin3" type="Area2D" parent="Environment/Coins"]
+position = Vector2(-160, 16)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_l8j71")
+metadata/_custom_type_script = "uid://dywusdonf4ncr"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Coins/Coin3"]
+shape = SubResource("CircleShape2D_lv4xx")
+debug_color = Color(1, 0.498039, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Coins/Coin3"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("3_l8j71")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Coins/Coin3"]
+libraries = {
+&"": SubResource("AnimationLibrary_lpyd6")
+}
+autoplay = "default"
+
+[node name="Coin4" type="Area2D" parent="Environment/Coins"]
+position = Vector2(-144, 16)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_l8j71")
+metadata/_custom_type_script = "uid://dywusdonf4ncr"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Coins/Coin4"]
+shape = SubResource("CircleShape2D_lv4xx")
+debug_color = Color(1, 0.498039, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Coins/Coin4"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("3_l8j71")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Coins/Coin4"]
+libraries = {
+&"": SubResource("AnimationLibrary_lpyd6")
+}
+autoplay = "default"
+
+[node name="Lever" type="Area2D" parent="Environment"]
+position = Vector2(152, 8)
+script = ExtResource("2_l8j71")
+metadata/_custom_type_script = "uid://dywusdonf4ncr"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Lever"]
+shape = SubResource("CircleShape2D_pr7rh")
+debug_color = Color(1, 0.498039, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Lever"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("5_nt26c")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Lever"]
+libraries = {
+&"": SubResource("AnimationLibrary_klfis")
+}
+
+[node name="Player" parent="." instance=ExtResource("1_aarpy")]

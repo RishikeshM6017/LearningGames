@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://c20noy54d2l"]
 
 [ext_resource type="Material" uid="uid://bwdbhortwelss" path="res://resources/materials/spatial/prototype_dark.material" id="1_g4l3r"]
-[ext_resource type="PackedScene" uid="uid://om8jo2dv2v6p" path="res://content/player/third_person_controller_3d/third_person_controller_3d.tscn" id="2_riafi"]
+[ext_resource type="PackedScene" uid="uid://om8jo2dv2v6p" path="res://content/player/thirdperson_controller_3d/thirdperson_controller_3d.tscn" id="2_riafi"]
 [ext_resource type="Script" uid="uid://bortyp6wvto7n" path="res://scripts/classes/actor_3d.gd" id="3_q52kp"]
 [ext_resource type="Script" uid="uid://jfcojf6tammd" path="res://scripts/components/controller_collider_3d.gd" id="4_g4l3r"]
 [ext_resource type="Material" uid="uid://wnrgn6i5sb5o" path="res://resources/materials/spatial/prototype_purple.material" id="5_gmdoe"]
